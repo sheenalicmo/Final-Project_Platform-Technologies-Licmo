@@ -1,13 +1,15 @@
-const express = require("express");
+const express = require('express');
+const path = require('path');
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
-// Serve files inside /public folder
-app.use(express.static("public"));
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Root route → show index.html
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+// Optional: catch-all route for '/'
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
